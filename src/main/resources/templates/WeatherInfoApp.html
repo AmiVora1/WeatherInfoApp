@@ -120,8 +120,28 @@
   <script>
     function searchWeather() {
       const city = document.getElementById("searchInput").value;
-      alert("Search triggered for: " + city);
-      // You can replace this alert with a fetch to your Spring Boot API
+      
+     
+
+    const payload = {
+      searchTerm: city
+    };
+alert(payload);
+    fetch("/api/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Search results:", data);
+      alert(data);
+      // You can update the UI with results here
+    })
+    .catch(error => console.error("Error:", error));
+
     }
   </script>
 
