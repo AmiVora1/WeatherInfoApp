@@ -1,0 +1,129 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Information</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00796b;
+      margin-bottom: 30px;
+    }
+
+    .search-container {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      margin: 0;
+      color: #00796b;
+    }
+
+    .card p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+<h1 th:text="'Hello, ' + ${message} + '!'" />
+  <h1>Weather Information</h1>
+
+
+
+  <div class="card-container" id="weatherCards">
+    <div class="card">
+      <h2>Auckland</h2>
+      <p>Temperature: 18°C</p>
+      <p>Condition: Sunny</p>
+    </div>
+    <div class="card">
+      <h2>Wellington</h2>
+      <p>Temperature: 16°C</p>
+      <p>Condition: Cloudy</p>
+    </div>
+    <div class="card">
+      <h2>Christchurch</h2>
+      <p>Temperature: 14°C</p>
+      <p>Condition: Rainy</p>
+    </div>
+  </div>
+  <br>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Enter city name" />
+    <button onclick="searchWeather()">Search</button>
+  </div>
+  <br>
+  <div class="card-container" id="weatherCards">
+    <div class="card">
+      <h2>Searched City</h2>
+      <p>Temperature: 18°C</p>
+      <p>Condition: Sunny</p>
+    </div>
+</div>
+  <script>
+    function searchWeather() {
+      const city = document.getElementById("searchInput").value;
+      alert("Search triggered for: " + city);
+      // You can replace this alert with a fetch to your Spring Boot API
+    }
+  </script>
+
+</body>
+</html>
