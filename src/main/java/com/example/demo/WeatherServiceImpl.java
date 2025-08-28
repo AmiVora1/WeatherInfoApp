@@ -4,10 +4,10 @@ package com.example.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.core.io.ClassPathResource;
 
 public class WeatherServiceImpl {
 
@@ -35,11 +35,20 @@ public class WeatherServiceImpl {
         WeatherInfoData WeatherInfoDataObj=null;
         ObjectMapper mapper = new ObjectMapper();
        try{
-                List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
+              /*   List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
                 new File("C:\\Learnings\\Java\\Program\\WeatherApp\\demo\\src\\main\\resources\\static\\data\\NZ_WeatherData.json"),
                 new TypeReference<ArrayList<WeatherInfoData>>() {}
             ).stream().filter(info -> city.equalsIgnoreCase(info.getCity())).collect(Collectors.toList())
-;
+;*/
+
+
+            List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
+                new ClassPathResource("static/data/NZ_WeatherData.json").getInputStream(),
+                new TypeReference<ArrayList<WeatherInfoData>>() {}
+            ).stream()
+            .filter(info -> city.equalsIgnoreCase(info.getCity()))
+            .collect(Collectors.toList());
+
             if (weatherListLocalObj.size()!=0)
             {
                 
