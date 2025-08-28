@@ -49,7 +49,7 @@ public class WeatherServiceImpl {
                 //This means data found in mock JSON file
                 WeatherInfoDataObj=weatherListLocalObj.get(0);
                 WeatherInfoDataObj.setResponseCode("1");
-                
+                //Add weather data to memory
                 weatherList.add(WeatherInfoDataObj);
             }
             else
@@ -61,7 +61,7 @@ public class WeatherServiceImpl {
         }
         catch(Exception e)
         {
-            System.out.println("Exception occurred with detail message::"+e.getMessage());
+            System.out.println("Exception occurred with detailed message::"+e.getMessage());
         }
         return WeatherInfoDataObj;
     }

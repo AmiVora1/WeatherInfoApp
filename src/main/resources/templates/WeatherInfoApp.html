@@ -83,7 +83,7 @@
 </head>
 <body>
 
-  <h1>Weather Information</h1>
+  <h1>NZ Weather Information System</h1>
 
   <div class="card-container" id="weatherCards">
    
@@ -98,6 +98,12 @@
     function searchWeather() {
       const city = document.getElementById("searchInput").value;
       
+      if(city=="")
+    {
+        alert("Please Enter City Name::");
+        exit; 
+    }
+
     const payload = {
       city: city
     };
