@@ -82,67 +82,61 @@
   </style>
 </head>
 <body>
-<h1 th:text="'Hello, ' + ${message} + '!'" />
+
   <h1>Weather Information</h1>
 
-
-
   <div class="card-container" id="weatherCards">
-    <div class="card">
-      <h2>Auckland</h2>
-      <p>Temperature: 18°C</p>
-      <p>Condition: Sunny</p>
-    </div>
-    <div class="card">
-      <h2>Wellington</h2>
-      <p>Temperature: 16°C</p>
-      <p>Condition: Cloudy</p>
-    </div>
-    <div class="card">
-      <h2>Christchurch</h2>
-      <p>Temperature: 14°C</p>
-      <p>Condition: Rainy</p>
-    </div>
+   
   </div>
   <br>
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Enter city name" />
     <button onclick="searchWeather()">Search</button>
   </div>
-  <br>
-  <div class="card-container" id="weatherCards">
-    <div class="card">
-      <h2>Searched City</h2>
-      <p>Temperature: 18°C</p>
-      <p>Condition: Sunny</p>
-    </div>
-</div>
+  
   <script>
     function searchWeather() {
       const city = document.getElementById("searchInput").value;
       
-     
-
     const payload = {
       searchTerm: city
     };
-alert(payload);
-    fetch("/api/search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    })
+
+    fetch("/api/search",
+             {
+              method: "POST",
+              headers: {
+                        "Content-Type": "application/json"
+                        },
+              body: JSON.stringify(payload)
+            })
     .then(response => response.json())
     .then(data => {
-      console.log("Search results:", data);
-      alert(data);
-      // You can update the UI with results here
-    })
-    .catch(error => console.error("Error:", error));
+                    console.log("Search results:", data);
+      
+      
+                     let output = "";
+                        data.forEach(item => {
+
+                        
+                          output += ` <div class="card">
+                        <h2>${item.city}</h2>
+                        <p>Temperature: ${item.temperature}°${item.unit}</p>
+                        <p>Condition: ${item.weather}</p>
+                      </div>`;
+                    });
+        alert(output);
+        document.getElementById("weatherCards").innerHTML = output;
+
+    
+     } );
+
 
     }
+
+
+    
+
   </script>
 
 </body>
