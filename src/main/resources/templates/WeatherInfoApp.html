@@ -99,7 +99,7 @@
       const city = document.getElementById("searchInput").value;
       
     const payload = {
-      searchTerm: city
+      city: city
     };
 
     fetch("/api/search",
@@ -114,18 +114,18 @@
     .then(data => {
                     console.log("Search results:", data);
       
-      
                      let output = "";
                         data.forEach(item => {
-
+                          
                         
                           output += ` <div class="card">
                         <h2>${item.city}</h2>
-                        <p>Temperature: ${item.temperature}°${item.unit}</p>
+                        <p>Temperature: ${item.temp}${item.unit}</p>
                         <p>Condition: ${item.weather}</p>
+                        <p>Date: ${item.date}</p>
                       </div>`;
                     });
-        alert(output);
+        
         document.getElementById("weatherCards").innerHTML = output;
 
     

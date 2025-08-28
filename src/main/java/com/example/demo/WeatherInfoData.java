@@ -3,11 +3,25 @@ package com.example.demo;
 
 public class WeatherInfoData {
     private String city;
-    private double temp;
+    private String temp;
     private String date;
     private String unit;
     private String weather;
+    private String responseCode;
 
+    public WeatherInfoData()
+    {
+
+    }
+    public WeatherInfoData(String city, String temp, String date, String unit, String weather, String responseCode)
+    {
+        this.city=city;
+        this.temp=temp;
+        this.date=date;
+        this.unit=unit;
+        this.weather=weather;
+        this.responseCode=responseCode;
+    }
     // Getter and Setter for city
     public String getCity() {
         return city;
@@ -17,10 +31,10 @@ public class WeatherInfoData {
     }
 
     // Getter and Setter for temperature
-    public double getTemp() {
+    public String getTemp() {
         return temp;
     }
-    public void setTemp(double temp) {
+    public void setTemp(String temp) {
         this.temp = temp;
     }
 
@@ -46,5 +60,12 @@ public class WeatherInfoData {
     }
     public void setWeather(String weather) {
         this.weather = weather;
+    }
+     // Getter and Setter for city
+    public String getResponseCode() {
+        return responseCode;
+    }
+    public void setResponseCode(String responseCode) {
+        this.responseCode = responseCode;
     }
 }

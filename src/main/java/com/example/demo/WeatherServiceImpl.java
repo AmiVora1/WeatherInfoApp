@@ -15,17 +15,19 @@ public class WeatherServiceImpl {
     
     public static WeatherInfoData checkInMemory(String city)
     {
-       System.out.println("Checking in memory for city::"+city);
+       
         for (WeatherInfoData weatherInfoData : weatherList) {
-            System.out.println("Inside for loop");
+            
             if(weatherInfoData.getCity().equalsIgnoreCase(city))
             {
-                System.out.println("Found city data::");
+                
                 return weatherInfoData;
             }
             
         }
-        return null;
+        WeatherInfoData weatherInfoData = new WeatherInfoData();
+        weatherInfoData.setResponseCode("0");
+        return weatherInfoData;
     }
 
     public WeatherInfoData searchWeatherInfoFromMockData (String city)
@@ -33,23 +35,29 @@ public class WeatherServiceImpl {
         WeatherInfoData WeatherInfoDataObj=null;
         ObjectMapper mapper = new ObjectMapper();
        try{
-       List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
+                List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
                 new File("C:\\Learnings\\Java\\Program\\WeatherApp\\demo\\src\\main\\resources\\static\\data\\NZ_WeatherData.json"),
                 new TypeReference<ArrayList<WeatherInfoData>>() {}
             ).stream().filter(info -> city.equalsIgnoreCase(info.getCity())).collect(Collectors.toList())
 ;
-            if (weatherListLocalObj !=null)
+            if (weatherListLocalObj.size()!=0)
             {
-                System.out.println("Added in memory::");
-                weatherList.add(weatherListLocalObj.get(0));
-                WeatherInfoDataObj=weatherListLocalObj.get(0);
                 
+                WeatherInfoDataObj=weatherListLocalObj.get(0);
+                WeatherInfoDataObj.setResponseCode("1");
+                
+                weatherList.add(WeatherInfoDataObj);
+            }
+            else
+            {
+                WeatherInfoDataObj=new WeatherInfoData("NOT FOUND",  "-",  "-",  "-",  "-", "0");
+               
             }
             
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Exception occurred with detail message::"+e.getMessage());
         }
         return WeatherInfoDataObj;
     }
