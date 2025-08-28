@@ -15,33 +15,28 @@ public class WeatherServiceImpl {
     
     public static WeatherInfoData checkInMemory(String city)
     {
-       
+     //This method searches weather data in memory , we are using arraylist here for in memory data
         for (WeatherInfoData weatherInfoData : weatherList) {
             
             if(weatherInfoData.getCity().equalsIgnoreCase(city))
             {
-                
+                //This means data found in arraylist
                 return weatherInfoData;
             }
             
         }
         WeatherInfoData weatherInfoData = new WeatherInfoData();
-        weatherInfoData.setResponseCode("0");
+        weatherInfoData.setResponseCode("0"); // This means data not found in arralist
         return weatherInfoData;
     }
 
     public WeatherInfoData searchWeatherInfoFromMockData (String city)
     {
+        //This method searches data from API, as part of this assessment we are using json mock data
         WeatherInfoData WeatherInfoDataObj=null;
         ObjectMapper mapper = new ObjectMapper();
        try{
-              /*   List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
-                new File("C:\\Learnings\\Java\\Program\\WeatherApp\\demo\\src\\main\\resources\\static\\data\\NZ_WeatherData.json"),
-                new TypeReference<ArrayList<WeatherInfoData>>() {}
-            ).stream().filter(info -> city.equalsIgnoreCase(info.getCity())).collect(Collectors.toList())
-;*/
-
-
+           //Read Json file and try to search data for given city name  
             List<WeatherInfoData> weatherListLocalObj = mapper.readValue(
                 new ClassPathResource("static/data/NZ_WeatherData.json").getInputStream(),
                 new TypeReference<ArrayList<WeatherInfoData>>() {}
@@ -51,7 +46,7 @@ public class WeatherServiceImpl {
 
             if (weatherListLocalObj.size()!=0)
             {
-                
+                //This means data found in mock JSON file
                 WeatherInfoDataObj=weatherListLocalObj.get(0);
                 WeatherInfoDataObj.setResponseCode("1");
                 
@@ -60,7 +55,7 @@ public class WeatherServiceImpl {
             else
             {
                 WeatherInfoDataObj=new WeatherInfoData("NOT FOUND",  "-",  "-",  "-",  "-", "0");
-               
+               //This means data not available / not found in mock JSON - This include invalid entry as well
             }
             
         }

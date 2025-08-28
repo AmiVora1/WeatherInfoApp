@@ -13,6 +13,7 @@ public class WeatherInfoData {
     {
 
     }
+    //Argument constructor
     public WeatherInfoData(String city, String temp, String date, String unit, String weather, String responseCode)
     {
         this.city=city;
